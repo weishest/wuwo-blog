@@ -1,0 +1,54 @@
+---
+/** Two staggered cards: newer story (left) and older story (right, offset down). (partials/nextprev.hbs) */
+import PostImage from '../../../components/PostImage.astro';
+import type { PostSummary } from '../../../lib/posts';
+
+interface Props {
+  newer?: PostSummary | undefined;
+  older?: PostSummary | undefined;
+}
+const { newer, older } = Astro.props;
+---
+
+{
+  (newer || older) && (
+    <aside class="nextprev">
+      <div class="nextprev-wrap">
+        {newer && (
+          <div class="nextprev-card is-newer">
+            {newer.entry.data.cover && (
+              <a class="nextprev-image" href={newer.url} tabindex="-1" aria-hidden="true">
+                <PostImage src={newer.entry.data.cover} width={300} alt="" loading="lazy" />
+              </a>
+            )}
+            <section class="nextprev-text">
+              <span class="nextprev-label">Newer story</span>
+              <h3 class="nextprev-title">
+                <a class="mark" href={newer.url}>
+                  {newer.entry.data.title}
+                </a>
+              </h3>
+            </section>
+          </div>
+        )}
+        {older && (
+          <div class="nextprev-card is-older">
+            <section class="nextprev-text">
+              <span class="nextprev-label">Older story</span>
+              <h3 class="nextprev-title">
+                <a class="mark" href={older.url}>
+                  {older.entry.data.title}
+                </a>
+              </h3>
+            </section>
+            {older.entry.data.cover && (
+              <a class="nextprev-image" href={older.url} tabindex="-1" aria-hidden="true">
+                <PostImage src={older.entry.data.cover} width={300} alt="" loading="lazy" />
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </aside>
+  )
+}

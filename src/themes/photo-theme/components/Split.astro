@@ -1,0 +1,84 @@
+---
+/**
+ * Full-height split: text on the left half, image on the right half.
+ * Used by the home slider (mode="slide") and by post / page headers. (partials/split.hbs)
+ */
+import PostImage from '../../../components/PostImage.astro';
+import { imageSize } from '../../../lib/cdn-images';
+import type { PostSummary } from '../../../lib/posts';
+import { coverAlt, coverSizes, coverWidths } from '../lib/site';
+import Byline from './Byline.astro';
+import TagLinks from './TagLinks.astro';
+
+type Props =
+  | { mode: 'slide'; post: PostSummary; eager?: boolean }
+  | { mode: 'post'; post: PostSummary }
+  | { mode: 'page'; title: string; excerpt?: string | undefined };
+
+const props = Astro.props;
+const post = props.mode === 'page' ? undefined : props.post;
+const cover = post?.entry.data.cover;
+const eager = props.mode === 'slide' ? (props.eager ?? false) : true;
+// Image half: 50vw × full height on desktop; stacked 500px / 50vh tall below 960px.
+const dims = cover && imageSize(cover);
+const sizes =
+  dims &&
+  coverSizes(dims, [
+    { media: '(min-width: 960px)', w: '50vw', h: 'max(100vh, 700px)' },
+    { media: '(min-width: 480px)', w: '100vw', h: '500px' },
+    { w: '100vw', h: '50vh' },
+  ]);
+---
+
+<div class={cover ? 'split' : 'split no-image'}>
+  <div class="split-text">
+    <div class="split-inner">
+      {
+        props.mode === 'slide' && (
+          <>
+            <Byline date={props.post.entry.data.pubDate} />
+            <h2 class="split-title">
+              <a class="mark" href={props.post.url}>
+                {props.post.entry.data.title}
+              </a>
+            </h2>
+            {props.post.entry.data.description && <p class="split-excerpt">{props.post.entry.data.description}</p>}
+            <TagLinks tags={props.post.tags} />
+          </>
+        )
+      }
+      {
+        props.mode === 'post' && (
+          <>
+            <Byline date={props.post.entry.data.pubDate} showDate />
+            <h1 class="split-title">{props.post.entry.data.title}</h1>
+            <TagLinks tags={props.post.tags} />
+          </>
+        )
+      }
+      {
+        props.mode === 'page' && (
+          <>
+            <h1 class="split-title">{props.title}</h1>
+            {props.excerpt && <p class="split-excerpt">{props.excerpt}</p>}
+          </>
+        )
+      }
+    </div>
+  </div>
+
+  {
+    post && cover && (
+      <figure class="split-media">
+        <PostImage
+          src={cover}
+          widths={coverWidths}
+          sizes={sizes || '(min-width: 960px) 50vw, 100vw'}
+          alt={coverAlt(post)}
+          loading={eager ? 'eager' : 'lazy'}
+          draggable="false"
+        />
+      </figure>
+    )
+  }
+</div>

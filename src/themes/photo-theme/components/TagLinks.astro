@@ -1,0 +1,12 @@
+---
+/** Up to 4 tag links. (partials/taglinks.hbs) */
+interface Props {
+  tags: { name: string; url: string }[];
+  limit?: number;
+}
+const { tags, limit = 4 } = Astro.props;
+---
+
+<div class="taglinks">
+  {tags.slice(0, limit).map((t) => <a href={t.url}>{t.name}</a>)}
+</div>

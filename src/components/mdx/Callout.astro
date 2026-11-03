@@ -1,0 +1,33 @@
+---
+/**
+ * A note box for MDX posts. Theme-agnostic: it only uses the design tokens
+ * every theme defines (--color-surface, --color-accent, --space-*, --radius).
+ */
+interface Props {
+  title?: string;
+}
+const { title } = Astro.props;
+---
+
+<aside class="callout">
+  {title && <strong class="title">{title}</strong>}
+  <div><slot /></div>
+</aside>
+
+<style>
+  .callout {
+    margin: var(--space-4) 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: var(--radius);
+  }
+  .title {
+    display: block;
+    margin-bottom: var(--space-1);
+    color: var(--color-accent);
+  }
+  .callout :global(p) {
+    margin: 0;
+  }
+</style>

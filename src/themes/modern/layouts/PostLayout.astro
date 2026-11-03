@@ -1,0 +1,148 @@
+---
+import PostImage from '../../../components/PostImage.astro';
+import type { PostProps } from '../../contract';
+import { formatDate } from '../../../lib/format';
+import BaseLayout from './BaseLayout.astro';
+import ImageOriginals from '../../../components/ImageOriginals.astro';
+import TagList from '../components/TagList.astro';
+
+type Props = PostProps;
+const { post, prev, next } = Astro.props;
+const { title, description, pubDate, updatedDate, cover, coverAlt, draft } = post.entry.data;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={cover}
+  type="article"
+  publishedTime={pubDate}
+  modifiedTime={updatedDate}
+>
+  <article>
+    <header class="post-header narrow">
+      <TagList tags={post.tags} />
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="meta">
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        {
+          updatedDate && (
+            <>
+              {' · Updated '}
+              <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>
+            </>
+          )
+        }
+        {draft && <span class="draft">Draft</span>}
+      </p>
+    </header>
+
+    {
+      cover && (
+        <PostImage
+          class="cover"
+          src={cover}
+          alt={coverAlt ?? ''}
+          widths={[800, 1200, 1600]}
+          sizes="(min-width: 72rem) 68rem, 100vw"
+          loading="eager"
+        />
+      )
+    }
+
+    <div class="prose narrow">
+      <slot />
+    </div>
+
+    <nav class="adjacent narrow" aria-label="More posts">
+      {
+        next ? (
+          <a href={next.url}>
+            <small>Newer</small>
+            {next.entry.data.title}
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        prev ? (
+          <a class="older" href={prev.url}>
+            <small>Older</small>
+            {prev.entry.data.title}
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </nav>
+  </article>
+  <ImageOriginals post={post} />
+</BaseLayout>
+
+<script>
+  import { initLightbox } from '../../../lib/lightbox';
+  initLightbox('article .cover, .prose img');
+</script>
+
+<style>
+  .post-header {
+    padding-top: var(--space-5);
+  }
+  .post-header h1 {
+    margin: var(--space-3) 0 var(--space-2);
+  }
+  .lede {
+    font-size: 1.2rem;
+    color: var(--color-muted);
+    margin: 0 0 var(--space-3);
+  }
+  .meta {
+    font-size: var(--font-size-small);
+    color: var(--color-muted);
+    margin: 0 0 var(--space-5);
+  }
+  .draft {
+    margin-left: var(--space-2);
+    padding: 0 var(--space-2);
+    border-radius: 999px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+  .cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    margin-bottom: var(--space-5);
+    box-shadow: var(--shadow-card);
+  }
+  .adjacent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+  .adjacent a {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .adjacent a:hover {
+    border-color: var(--color-accent);
+  }
+  .adjacent small {
+    color: var(--color-muted);
+    font-weight: 400;
+  }
+  .older {
+    text-align: right;
+  }
+</style>

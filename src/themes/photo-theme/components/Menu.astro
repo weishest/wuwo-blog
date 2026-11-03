@@ -1,0 +1,49 @@
+---
+/**
+ * Slide-in menu panel (scripts/menu.ts). (partials/menu.hbs)
+ * The members box and the author suggestions are left out: the blog has no
+ * memberships and a single author.
+ */
+import { getTags } from '../../../lib/posts';
+import { photoTheme } from '../theme.config';
+import { isCurrent, navHref, navSlug } from '../lib/site';
+
+const path = Astro.url.pathname;
+const tags = [...(await getTags()).values()]
+  .sort((a, b) => b.posts.length - a.posts.length || a.name.localeCompare(b.name))
+  .slice(0, 10);
+---
+
+<div class="drawer-overlay js-menu-close"></div>
+
+<aside class="drawer" id="site-menu" aria-label="Menu" aria-hidden="true">
+  <nav class="drawer-nav">
+    <ul class="nav">
+      {
+        photoTheme.navigation.map((item) => (
+          <li class={isCurrent(item.url, path) ? `${navSlug(item.label)} nav-current` : navSlug(item.label)}>
+            <a href={navHref(item.url)}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <div class="drawer-search">
+    <button class="drawer-search-field" type="button" data-search-open>Search</button>
+    <p class="drawer-search-hint">Search posts and tags</p>
+  </div>
+
+  {
+    tags.length > 0 && (
+      <div class="drawer-suggest">
+        <h3>Tags</h3>
+        <div class="taglinks">
+          {tags.map((t) => (
+            <a href={t.url}>{t.name}</a>
+          ))}
+        </div>
+      </div>
+    )
+  }
+</aside>

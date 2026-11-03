@@ -1,0 +1,20 @@
+---
+/** Story list + Load more (index.hbs / tag.hbs). `grid` switches to archive cards. */
+import type { Page } from 'astro';
+import type { PostSummary } from '../../../lib/posts';
+import Story from './Story.astro';
+import LoadMore from './LoadMore.astro';
+
+interface Props {
+  page: Page<PostSummary>;
+  grid?: boolean;
+}
+const { page, grid = false } = Astro.props;
+---
+
+<section class={grid ? 'stories-section is-archive' : 'stories-section'}>
+  <div class={grid ? 'stories is-grid js-stories' : 'stories js-stories'}>
+    {page.data.map((post) => <Story post={post} />)}
+  </div>
+  <LoadMore page={page} />
+</section>

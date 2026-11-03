@@ -1,0 +1,62 @@
+---
+/**
+ * One story row. In `.stories` rows alternate sides; in `.stories.is-grid`
+ * they become two-column cards. `fullWidth: true` in a post's frontmatter
+ * plays the role of Ghost's internal #full-width tag. (partials/loop-item.hbs)
+ */
+import PostImage from '../../../components/PostImage.astro';
+import { imageSize } from '../../../lib/cdn-images';
+import type { PostSummary } from '../../../lib/posts';
+import { coverAlt, coverSizes, coverWidths } from '../lib/site';
+import Byline from './Byline.astro';
+import TagLinks from './TagLinks.astro';
+
+interface Props {
+  post: PostSummary;
+}
+const { post } = Astro.props;
+const { title, description, pubDate, cover, featured, fullWidth } = post.entry.data;
+const classes = [
+  'story',
+  'post',
+  featured && 'featured',
+  cover ? 'has-image' : 'no-image',
+  fullWidth && 'is-wide',
+]
+  .filter(Boolean)
+  .join(' ');
+// Image half 50vw × 85vh (full-width rows: 100vw × 70vh); stacked 500px / 300px tall below 960px.
+const dims = cover && imageSize(cover);
+const sizes =
+  dims &&
+  coverSizes(dims, [
+    fullWidth
+      ? { media: '(min-width: 960px)', w: '100vw', h: '70vh' }
+      : { media: '(min-width: 960px)', w: '50vw', h: '85vh' },
+    { media: '(min-width: 480px)', w: '100vw', h: '500px' },
+    { w: '100vw', h: '300px' },
+  ]);
+---
+
+<article class={classes}>
+  {
+    cover && (
+      <a class="story-media" href={post.url} tabindex="-1" aria-hidden="true">
+        <PostImage
+          src={cover}
+          widths={[300, ...coverWidths]}
+          sizes={sizes || '(min-width: 960px) 50vw, 100vw'}
+          alt={coverAlt(post)}
+          loading="lazy"
+        />
+      </a>
+    )
+  }
+
+  <div class="story-body">
+    <Byline date={pubDate} showDate />
+    <h2 class="story-title"><a class="mark" href={post.url}>{title}</a></h2>
+    {description && <p class="story-excerpt">{description}</p>}
+    <TagLinks tags={post.tags} />
+  </div>
+</article>

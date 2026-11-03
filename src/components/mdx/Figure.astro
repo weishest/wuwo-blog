@@ -1,0 +1,34 @@
+---
+/**
+ * Image with optional caption and width for MDX posts.
+ *
+ *   import photo from './photo.jpg';
+ *   <Figure src={photo} alt="…" caption="…" width="wide" />
+ *
+ * `src` is the imported local image while writing; `npm run images:publish`
+ * turns the import into the published URL, which renders as a plain <img>.
+ *
+ * `width`: 'regular' (column width), 'wide' or 'full' (edge to edge).
+ * Uses Ghost-style class names (kg-width-wide / kg-width-full) that themes can
+ * style; themes that ignore them show a normal column-width image.
+ */
+import PostImage from '../PostImage.astro';
+import type { CoverSource } from '../../lib/cdn-images';
+
+interface Props {
+  src: CoverSource;
+  alt: string;
+  caption?: string;
+  width?: 'regular' | 'wide' | 'full';
+}
+const { src, alt, caption, width = 'regular' } = Astro.props;
+const classes = ['kg-card', 'kg-image-card', width !== 'regular' && `kg-width-${width}`, caption && 'kg-card-hascaption']
+  .filter(Boolean)
+  .join(' ');
+const sizes = width === 'full' ? '100vw' : width === 'wide' ? '(min-width: 960px) 1100px, 100vw' : '(min-width: 960px) 740px, 100vw';
+---
+
+<figure class={classes}>
+  <PostImage src={src} alt={alt} widths={[600, 1200, 2000]} sizes={sizes} class="kg-image" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

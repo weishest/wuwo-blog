@@ -1,0 +1,248 @@
+/* Base elements and shared pieces
+/* ---------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    background-color: var(--bg);
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.menu-is-open {
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, blockquote {
+    font-family: var(--font-head);
+    font-weight: var(--weight-head);
+    line-height: 1.3;
+    letter-spacing: -0.018em;
+    word-spacing: -0.05em;
+    color: var(--text);
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, blockquote {
+    margin: 0;
+}
+
+a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.15s ease, background-size 0.6s ease-out, background-color 0.15s ease;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+::selection {
+    color: #0f0f0f;
+    background: var(--accent);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.site {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site-main {
+    flex: 1 0 auto;
+}
+
+/* Highlighter underline: an accent bar behind the lower third of the text */
+.mark {
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat left 87% / 0 30%;
+    transition: background-size 0.6s ease-out;
+}
+
+.mark:hover {
+    background-size: 97% 30%;
+}
+
+/* "by A & B" line */
+.byline {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: var(--weight-head);
+    line-height: 1.5;
+}
+
+.byline time {
+    display: inline-block;
+}
+
+.byline a:hover {
+    color: var(--accent);
+}
+
+/* Tag links */
+.taglinks {
+    font-family: var(--font-head);
+    font-size: 15px;
+    font-weight: var(--weight-head);
+    padding-top: 20px;
+}
+
+.taglinks a {
+    display: inline-flex;
+    padding: 10px 10px 0 0;
+    line-height: 1.1;
+    letter-spacing: 1px;
+}
+
+.taglinks a:hover {
+    color: var(--accent);
+}
+
+
+/* Square outlined button */
+.btn {
+    display: inline-block;
+    padding: 25px;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text);
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.btn:hover {
+    color: var(--bg);
+    background-color: var(--ink);
+}
+
+/* Input with only an underline */
+.line-input {
+    display: block;
+    width: 65%;
+    height: 35px;
+    margin: 20px auto 30px;
+    padding: 6px 9px;
+    border: 0;
+    border-bottom: 2px solid var(--ink);
+    border-radius: 0;
+    font-family: var(--font-head);
+    font-size: 20px;
+    font-weight: var(--weight-head);
+    text-align: center;
+    color: var(--text);
+    background: transparent;
+    outline: 0;
+    transition: width 0.6s ease 0.2s;
+}
+
+.line-input::placeholder {
+    color: var(--text);
+    opacity: 1;
+}
+
+.line-input:focus {
+    width: 85%;
+}
+
+/* Rise-in for list rows (only when JS runs; content stays visible either way) */
+.has-js .reveal {
+    transform: translateY(120px);
+    transition: transform 0.8s ease-in-out;
+}
+
+.has-js .reveal.is-in {
+    transform: none;
+}
+
+@media (max-width: 479px) {
+    .has-js .reveal {
+        transform: translateY(60px);
+    }
+}
+
+@media (max-width: 1024px) {
+    .byline,
+    .taglinks {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .btn {
+        padding: 20px 25px;
+        line-height: 1.1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+    .has-js .reveal {
+        transform: none;
+    }
+}
+
+/* Match the reference box model: these widths exclude their padding */
+.stories,
+.site-foot-inner,
+.nextprev,
+.split .byline,
+.split-excerpt,
+.story .byline,
+.story-excerpt,
+.line-input {
+    box-sizing: content-box;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}

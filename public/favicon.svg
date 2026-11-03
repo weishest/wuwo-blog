@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    rect { fill: #22201c; }
+    text { fill: #fbf9f4; }
+    @media (prefers-color-scheme: dark) { rect { fill: #fbf9f4; } text { fill: #22201c; } }
+  </style>
+  <rect width="32" height="32" rx="6"/>
+  <text x="16" y="23" font-family="Georgia, serif" font-size="20" text-anchor="middle">b</text>
+</svg>

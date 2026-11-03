@@ -1,0 +1,16 @@
+---
+/** Error page (error.hbs). */
+import type { NotFoundProps } from '../../contract';
+import { withBase } from '../../../lib/url';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = NotFoundProps;
+---
+
+<BaseLayout title="Page not found">
+  <section class="error-page">
+    <h1 class="error-code">404</h1>
+    <h3 class="error-message">Page not found</h3>
+    <a class="btn" href={withBase('/')}>Back to home</a>
+  </section>
+</BaseLayout>

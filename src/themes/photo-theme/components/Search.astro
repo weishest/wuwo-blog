@@ -1,0 +1,13 @@
+---
+/** Search overlay (scripts/search.ts), opened from the menu's search field. */
+import { withBase } from '../../../lib/url';
+---
+
+<div class="search js-search" role="dialog" aria-modal="true" aria-label="Search" aria-hidden="true" data-index={withBase('/search.json')}>
+  <button class="search-close js-search-close" type="button" aria-label="Close search"><span></span><span></span></button>
+  <div class="search-inner">
+    <input class="search-field" type="search" placeholder="Search" aria-label="Search" autocomplete="off" />
+    <p class="search-hint">Search posts and tags</p>
+    <ul class="search-results"></ul>
+  </div>
+</div>

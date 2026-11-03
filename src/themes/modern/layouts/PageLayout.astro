@@ -1,0 +1,15 @@
+---
+/** Generic prose page (used by About). */
+import type { PageProps } from '../../contract';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = PageProps;
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="prose narrow">
+    <h1>{title}</h1>
+    <slot />
+  </article>
+</BaseLayout>

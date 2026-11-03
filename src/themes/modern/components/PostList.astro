@@ -1,0 +1,34 @@
+---
+import type { PostSummary } from '../../../lib/posts';
+import PostCard from './PostCard.astro';
+
+interface Props {
+  posts: PostSummary[];
+}
+const { posts } = Astro.props;
+---
+
+{
+  posts.length === 0 ? (
+    <p class="empty">No posts yet.</p>
+  ) : (
+    <ul class="grid">
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: var(--space-4);
+    padding: 0;
+    margin: 0;
+  }
+  .empty {
+    color: var(--color-muted);
+  }
+</style>

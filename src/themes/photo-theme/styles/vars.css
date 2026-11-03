@@ -1,0 +1,44 @@
+/* Design tokens (light only)
+   --accent is not set here: it comes only from theme.config.ts. BaseLayout
+   writes it, and the fonts, onto <html> as inline custom properties, which
+   win over the font fallbacks below.
+/* ---------------------------------------------------------- */
+
+:root {
+    --text: #0f0f0f;
+    --text-2: #484848;
+    --bg: #fff;
+    --gray-1: #f9f9f9;
+    --gray-2: #f1f1f1;
+    --line: #e8e8e8;
+    --ink: #0f0f0f;
+    --gold: #9c8454;
+    --alert: #f74856;
+    --pending: #ff970d;
+    --overlay-rgb: 255, 255, 255;
+    --shade: rgba(0, 0, 0, 0.6);
+
+    --font-head: "Josefin Sans", sans-serif;
+    --font-body: "Mulish", sans-serif;
+    --weight-head: 600;
+
+    --logo-height: 45px;
+    --logo-height-sm: 30px;
+
+    /* Shared token names used by theme-independent MDX components (THEMES.md) */
+    --color-bg: var(--bg);
+    --color-surface: var(--gray-1);
+    --color-text: var(--text);
+    --color-muted: var(--text-2);
+    --color-border: var(--line);
+    --color-accent: var(--accent);
+    --space-1: 5px;
+    --space-2: 10px;
+    --space-3: 20px;
+    --space-4: 30px;
+    --space-5: 40px;
+    --space-6: 80px;
+    --radius: 0;
+
+    color-scheme: light;
+}

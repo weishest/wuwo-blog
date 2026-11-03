@@ -1,0 +1,65 @@
+---
+/** Footer: secondary navigation, social icons, copyright. (partials/footer.hbs) */
+import { siteConfig } from '../../../site.config';
+import { withBase } from '../../../lib/url';
+import { photoTheme } from '../theme.config';
+import { isCurrent, navHref, navSlug } from '../lib/site';
+import X from './icons/X.astro';
+import Facebook from './icons/Facebook.astro';
+import Rss from './icons/Rss.astro';
+
+const path = Astro.url.pathname;
+const x = siteConfig.social.x ?? siteConfig.social.twitter;
+const facebook = siteConfig.social.facebook;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <nav class="site-foot-nav">
+      <ul class="nav">
+        {
+          photoTheme.secondaryNavigation.map((item) => (
+            <li class={isCurrent(item.url, path) ? `${navSlug(item.label)} nav-current` : navSlug(item.label)}>
+              <a href={navHref(item.url)}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-foot-icons">
+      {
+        x && (
+          <a href={x} target="_blank" rel="noopener" aria-label="X">
+            <X />
+          </a>
+        )
+      }
+      {
+        facebook && (
+          <a href={facebook} target="_blank" rel="noopener" aria-label="Facebook">
+            <Facebook />
+          </a>
+        )
+      }
+      <a href={withBase('/rss.xml')} target="_blank" rel="noopener" aria-label="RSS"><Rss /></a>
+    </div>
+
+    <p class="site-foot-copy">
+      {
+        photoTheme.footerText ? (
+          photoTheme.footerText
+        ) : (
+          <>
+            © {year} <a href={withBase('/')}>{siteConfig.title}</a>. All rights reserved. Published with{' '}
+            <a href="https://astro.build" target="_blank" rel="noopener">
+              Astro
+            </a>
+            .
+          </>
+        )
+      }
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,26 @@
+---
+import '../styles/global.css';
+import type { BaseProps } from '../../contract';
+import SEO from '../../../components/SEO.astro';
+import ThemeInit from '../../../components/ThemeInit.astro';
+import { siteConfig } from '../../../site.config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+type Props = BaseProps;
+---
+
+<!doctype html>
+<html lang={siteConfig.lang}>
+  <head>
+    <SEO {...Astro.props} />
+    <ThemeInit />
+  </head>
+  <body>
+    <Header />
+    <main class="container">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

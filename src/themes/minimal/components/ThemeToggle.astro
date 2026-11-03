@@ -1,0 +1,39 @@
+---
+/** Text-style light/dark switch. Behaviour lives in src/lib/color-scheme.ts. */
+---
+
+<button type="button" class="toggle" data-color-scheme-toggle aria-label="Toggle dark mode">
+  <span class="to-dark">dark</span>
+  <span class="to-light">light</span>
+</button>
+
+<script>
+  import { initColorSchemeToggles } from '../../../lib/color-scheme';
+  initColorSchemeToggles();
+</script>
+
+<style>
+  .toggle {
+    font: inherit;
+    font-size: var(--font-size-small);
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  .toggle:hover {
+    color: var(--color-accent);
+  }
+  .to-light {
+    display: none;
+  }
+  .toggle[data-scheme='dark'] .to-dark {
+    display: none;
+  }
+  .toggle[data-scheme='dark'] .to-light {
+    display: inline;
+  }
+</style>

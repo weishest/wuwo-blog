@@ -1,0 +1,55 @@
+---
+/** Page shell (default.hbs): floating header, main, footer, menu panel, search overlay. */
+import '../styles/index.css';
+import type { BaseProps } from '../../contract';
+import SEO from '../../../components/SEO.astro';
+import { siteConfig } from '../../../site.config';
+import { photoTheme } from '../theme.config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Menu from '../components/Menu.astro';
+import Search from '../components/Search.astro';
+
+type Props = BaseProps;
+
+// Theme settings written onto :root, as Ghost does with --ghost-accent-color.
+const { accent, fonts } = photoTheme;
+const rootVars = `--accent: ${accent}; --font-head: ${fonts.head}; --font-body: ${fonts.body}; --weight-head: ${fonts.headWeight};`;
+---
+
+<!doctype html>
+<html lang={siteConfig.lang} style={rootVars}>
+  <head>
+    <SEO {...Astro.props} />
+    <script is:inline>
+      document.documentElement.classList.add('has-js');
+    </script>
+    {
+      fonts.href && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link rel="stylesheet" href={fonts.href} />
+        </>
+      )
+    }
+  </head>
+  <body class="is-light">
+    <div class="site">
+      <Header />
+
+      <main class="site-main">
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+
+    <Menu />
+    <Search />
+
+    <script>
+      import '../scripts/index';
+    </script>
+  </body>
+</html>

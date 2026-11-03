@@ -1,0 +1,462 @@
+/* Post body, image cards, newer/older cards
+/* ---------------------------------------------------------- */
+
+.post-body {
+    position: relative;
+    box-sizing: content-box;
+    max-width: 740px;
+    margin: 100px auto 15vh;
+    padding: 0 80px;
+    color: var(--text-2);
+}
+
+.post-body.no-image,
+.post-body.is-bare {
+    margin-top: 0;
+}
+
+.post-body.is-bare {
+    padding-top: 180px;
+}
+
+/* Wide elements reach 180px past the column, never closer than 80px to the viewport edge */
+.post-content {
+    --wide: min(calc(100% + 360px), calc(100vw - 160px));
+}
+
+.post-content > * {
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.post-content p {
+    position: relative;
+    line-height: 1.6;
+}
+
+.post-content strong {
+    color: var(--text);
+}
+
+.post-content a:not(.kg-btn):not(.kg-bookmark-container):not(.kg-product-card-button):not(.kg-cta-button):not(.kg-file-card-container) {
+    color: var(--text-2);
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat left 100% / 90% 1px;
+    transition: background-size 0.3s ease-out;
+}
+
+.post-content a:not([class]):hover {
+    background-size: 97% 1px;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    margin: 0 0 20px -1px;
+}
+
+.post-content h1 { margin-top: 60px; font-size: 55px; }
+.post-content h2 { margin-top: 55px; font-size: 41px; }
+.post-content h3 { margin-top: 45px; font-size: 32px; }
+.post-content h4 { margin-top: 40px; font-size: 25px; }
+.post-content h5 { margin-top: 35px; font-size: 20px; }
+.post-content h6 { margin-top: 35px; font-size: 17px; }
+
+.post-content :is(h1, h2, h3, h4, h5, h6, blockquote) a {
+    color: var(--text) !important;
+    background-position: left 87% !important;
+    background-size: 80% 30% !important;
+    transition: background-size 0.6s ease-out;
+}
+
+.post-content :is(h1, h2, h3, h4, h5, h6, blockquote) a:hover {
+    background-size: 97% 30% !important;
+}
+
+.post-content ul,
+.post-content ol {
+    margin-left: 15px;
+    padding-left: 20px;
+}
+
+.post-content li {
+    margin-bottom: 10px;
+}
+
+.post-content hr {
+    display: block;
+    width: 80px;
+    height: 2px;
+    margin: 60px 0 80px;
+    border: 0;
+    background-color: var(--line);
+}
+
+.post-content mark {
+    padding: 0 4px 2px;
+    border-radius: 3px;
+    color: #0f0f0f;
+    background-color: var(--accent);
+}
+
+.post-content code {
+    padding: 2px 5px;
+    font-size: 85%;
+    background-color: var(--gray-2);
+}
+
+.post-content pre {
+    min-width: 100%;
+    overflow-x: auto;
+    padding: 10px 15px;
+    background-color: var(--gray-2);
+}
+
+.post-content pre.astro-code {
+    background-color: var(--gray-2) !important;
+}
+
+.post-content pre code {
+    padding: 0;
+    background: none;
+}
+
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.post-content th,
+.post-content td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+
+.post-content th {
+    color: var(--text);
+}
+
+/* Big quote panel */
+.post-content blockquote:not(.kg-blockquote-alt) {
+    position: relative;
+    width: var(--wide);
+    margin: 80px 0 80px calc((100% - var(--wide)) / 2);
+    padding: 130px 180px 140px;
+    font-size: 40px;
+    background-color: var(--gray-1);
+}
+
+.post-content blockquote p {
+    margin: 0;
+    line-height: 1.3;
+}
+
+.post-content blockquote cite {
+    font-size: 25px;
+    font-style: normal;
+}
+
+.post-content blockquote.kg-blockquote-alt {
+    position: relative;
+    margin: 80px 0;
+    padding: 60px 0 0;
+    font-size: 32px;
+    text-align: center;
+}
+
+.post-content blockquote.kg-blockquote-alt::before {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    content: "\201C";
+    font-size: 100px;
+    line-height: 1;
+    color: var(--accent);
+    transform: translateX(-50%);
+}
+
+/* Images and Ghost card widths */
+.post-content img {
+    width: 100%;
+    height: auto;
+}
+
+.post-content .kg-card {
+    width: 100%;
+}
+
+.post-content .kg-image-card,
+.post-content .kg-gallery-card,
+.post-content .kg-embed-card {
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+.post-content .kg-image-card img {
+    margin: 0 auto;
+}
+
+/* Prefixed with .post-content (unlike the Ghost CSS) so these beat
+   `.post-content .kg-card { width: 100% }`; otherwise wide and full-width
+   images stay at the column width. */
+.post-content .kg-width-wide {
+    position: relative;
+    width: var(--wide);
+    max-width: none;
+    margin-left: calc((100% - var(--wide)) / 2) !important;
+}
+
+.post-content .kg-width-full {
+    position: relative;
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw) !important;
+}
+
+.kg-width-full img {
+    width: 100%;
+}
+
+.post-content figcaption {
+    margin-top: 15px;
+    padding: 0 15px;
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.post-content .kg-embed-card > iframe {
+    margin-inline: auto;
+}
+
+.post-content .kg-bookmark-container {
+    color: var(--text);
+    background-color: var(--gray-1);
+}
+
+.post-content .kg-btn {
+    border-radius: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Newer / older story cards */
+.nextprev {
+    max-width: 1400px;
+    margin: 0 auto 150px;
+    padding: 0 80px;
+}
+
+.nextprev-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.nextprev-card {
+    display: flex;
+    flex: 1 1 50%;
+    min-width: 0;
+}
+
+.nextprev-image {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 215px;
+    min-height: 215px;
+}
+
+.nextprev-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nextprev-text {
+    flex: 1 1 auto;
+    min-height: 215px;
+    letter-spacing: 1px;
+}
+
+.nextprev-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-2);
+}
+
+.nextprev-title {
+    margin: 15px 0 8px;
+    font-size: 34px;
+    letter-spacing: -0.018em;
+}
+
+.nextprev-card.is-newer .nextprev-text {
+    margin-right: -20px;
+    padding: 50px 40px;
+    background-color: var(--gray-1);
+}
+
+.nextprev-card.is-older {
+    position: relative;
+    margin: 50px 0 -50px;
+}
+
+.nextprev-card.is-older .nextprev-text {
+    margin-left: -20px;
+    padding: 50px 40px 50px 80px;
+    text-align: right;
+    background-color: var(--gray-2);
+}
+
+.nextprev-card:only-child {
+    margin: 0;
+}
+
+.nextprev-card:only-child .nextprev-text {
+    margin: 0;
+    background-color: var(--gray-1);
+}
+
+/* Breakpoints */
+@media (min-width: 960px) and (max-width: 1399px) {
+    .post-content blockquote:not(.kg-blockquote-alt) {
+        padding: 80px 90px;
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 959px) {
+    .post-body {
+        margin-top: 0;
+        padding-inline: 40px;
+        font-size: 16px;
+    }
+
+    .post-content {
+        --wide: 100%;
+    }
+
+    .post-content h1 { margin-top: 50px; font-size: 45px; }
+    .post-content h2 { margin-top: 45px; font-size: 33px; }
+    .post-content h3 { margin-top: 40px; font-size: 26px; }
+    .post-content h4 { margin-top: 35px; font-size: 20px; }
+
+    .post-content blockquote:not(.kg-blockquote-alt) {
+        padding: 50px 35px;
+        font-size: 28px;
+    }
+
+    .nextprev {
+        margin-bottom: 10vh;
+        padding-inline: 40px;
+    }
+
+    .nextprev-wrap {
+        flex-wrap: wrap;
+        max-width: 740px;
+        margin: 0 auto;
+    }
+
+    .nextprev-card {
+        flex-basis: 100%;
+    }
+
+    .nextprev-card.is-newer {
+        margin-right: 7%;
+    }
+
+    .nextprev-card.is-older {
+        margin: -20px 0 0 7%;
+    }
+
+    .nextprev-card .nextprev-text {
+        min-height: 180px;
+        margin: 0 !important;
+    }
+
+    .nextprev-card.is-newer .nextprev-text {
+        padding: 30px 50px 30px 30px;
+    }
+
+    .nextprev-card.is-older .nextprev-text {
+        padding: 40px 30px 30px 50px;
+    }
+
+    .nextprev-image {
+        flex-basis: 150px;
+        min-height: 180px;
+    }
+
+    .nextprev-title {
+        margin: 10px 0 0;
+        font-size: 25px;
+    }
+
+    .nextprev-label {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 479px) {
+    .post-body {
+        padding-inline: 20px;
+    }
+
+    .post-content > * {
+        margin-bottom: 30px;
+    }
+
+    .post-content h1 { margin-top: 45px; font-size: 38px; }
+    .post-content h2 { margin-top: 40px; font-size: 30px; }
+    .post-content h3 { margin-top: 35px; font-size: 24px; }
+    .post-content h4 { margin-top: 30px; font-size: 19px; }
+
+    .post-content blockquote:not(.kg-blockquote-alt) {
+        margin-block: 30px 40px;
+        padding: 30px 20px;
+        font-size: 20px;
+    }
+
+    .nextprev {
+        margin-bottom: 5vh;
+        padding-inline: 20px;
+    }
+
+    .nextprev-card.is-newer,
+    .nextprev-card.is-older {
+        margin: 0 0 20px;
+    }
+
+    .nextprev-card .nextprev-text {
+        min-height: 140px;
+        padding: 20px !important;
+    }
+
+    .nextprev-image {
+        flex-basis: 95px;
+        min-height: 140px;
+    }
+
+    .nextprev-title {
+        font-size: 17px;
+    }
+
+    .nextprev-label {
+        font-size: 9px;
+    }
+}
+
+/* No newer or older story: drop the empty block and its spacing */
+.nextprev:not(:has(.nextprev-card)) {
+    display: none;
+}

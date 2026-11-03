@@ -1,0 +1,29 @@
+---
+/** /tags/ (no Ghost equivalent): archive header + flat tag cards. */
+import type { TagIndexProps } from '../../contract';
+import BaseLayout from './BaseLayout.astro';
+import ArchiveHeader from '../components/ArchiveHeader.astro';
+
+type Props = TagIndexProps;
+const { tags } = Astro.props;
+---
+
+<BaseLayout title="Tags" description="Browse stories by tag.">
+  <ArchiveHeader name="Tags" description="Browse stories by topic." total={tags.length} unit={['tag', 'tags']} />
+  <div class="tag-grid">
+    {
+      tags.map((t) => (
+        <article class="tag-card">
+          <span class="tag-card-label">
+            {t.count} {t.count === 1 ? 'story' : 'stories'}
+          </span>
+          <h2 class="tag-card-title">
+            <a class="mark" href={t.url}>
+              {t.name}
+            </a>
+          </h2>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

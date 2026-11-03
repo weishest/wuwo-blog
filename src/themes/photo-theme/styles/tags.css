@@ -1,0 +1,63 @@
+/* Tag index (/tags/). Not part of the Ghost theme; built from the archive
+   header plus flat gray cards in the story-list width.
+/* ---------------------------------------------------------- */
+
+.tag-grid {
+    box-sizing: content-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 80px;
+}
+
+.archive + .tag-grid {
+    margin-top: 150px;
+}
+
+.tag-card {
+    padding: 60px 40px;
+    background-color: var(--gray-1);
+}
+
+.tag-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-2);
+}
+
+.tag-card-title {
+    margin: 15px 0 0;
+    font-size: 30px;
+    line-height: 1.1;
+}
+
+@media (max-width: 1399px) {
+    .archive + .tag-grid {
+        margin-top: 100px;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+    .tag-grid {
+        padding-inline: 40px;
+    }
+}
+
+@media (max-width: 479px) {
+    .tag-grid {
+        padding-inline: 20px;
+    }
+
+    .tag-card {
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .tag-card-title {
+        font-size: 25px;
+    }
+}

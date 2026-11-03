@@ -1,0 +1,14 @@
+---
+/** /blog/ and /blog/N/: the home feed without the slider (Ghost's paged home). */
+import type { PostListProps } from '../../contract';
+import BaseLayout from './BaseLayout.astro';
+import Stories from '../components/Stories.astro';
+
+type Props = PostListProps;
+const { page } = Astro.props;
+const title = page.currentPage > 1 ? `Stories (page ${page.currentPage})` : 'Stories';
+---
+
+<BaseLayout title={title} description="All stories, newest first." prev={page.url.prev} next={page.url.next}>
+  <Stories page={page} />
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import type { TagProps } from '../../contract';
+import { withBase } from '../../../lib/url';
+import BaseLayout from './BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import Pagination from '../components/Pagination.astro';
+
+type Props = TagProps;
+const { tag, page } = Astro.props;
+---
+
+<BaseLayout title={`Tag: ${tag.name}`} description={`Posts tagged “${tag.name}”.`}>
+  <header class="page-head">
+    <a class="back" href={withBase('/tags/')}>← All tags</a>
+    <h1><span>#</span>{tag.name}</h1>
+    <p>{page.total} {page.total === 1 ? 'post' : 'posts'}</p>
+  </header>
+  <PostList posts={page.data} />
+  <Pagination page={page} />
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-5) var(--space-4);
+  }
+  .back {
+    font-size: var(--font-size-small);
+    font-weight: 600;
+  }
+  .page-head h1 {
+    margin: var(--space-2) 0 0;
+  }
+  .page-head h1 span {
+    color: var(--color-accent);
+  }
+  .page-head p {
+    margin: var(--space-2) 0 0;
+    color: var(--color-muted);
+  }
+</style>

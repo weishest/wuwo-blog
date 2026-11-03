@@ -1,0 +1,22 @@
+---
+/**
+ * Data for the image viewer's "Download original" link: the full-resolution
+ * copies of the published images in this post (src/lib/lightbox.ts reads
+ * #image-originals). Renders nothing when there are none.
+ *
+ * Every theme's PostLayout renders it: <ImageOriginals post={post} />
+ */
+import { originalsFor } from '../lib/cdn-images';
+import type { PostSummary } from '../lib/posts';
+
+interface Props {
+  post: PostSummary;
+}
+const { post } = Astro.props;
+const cover = post.entry.data.cover;
+const originals = originalsFor([post.entry.body, typeof cover === 'string' ? cover : undefined]);
+// `<` escaped so the JSON can never close the script element.
+const json = JSON.stringify(originals).replace(/</g, '\\u003c');
+---
+
+{Object.keys(originals).length > 0 && <script type="application/json" id="image-originals" set:html={json} />}

@@ -1,0 +1,156 @@
+/* Footer and error page
+/* ---------------------------------------------------------- */
+
+.site-foot {
+    flex-shrink: 0;
+    padding-top: 5vh;
+}
+
+.site-foot-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 1400px;
+    margin: 8vh auto 0;
+    padding: 0 80px;
+}
+
+.site-foot-nav {
+    flex: 0 0 60%;
+    padding: 0 0 5px;
+    line-height: 1;
+}
+
+.site-foot-nav .nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-foot-nav .nav li {
+    display: inline-block;
+    margin: 0 15px 8px 0;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: 0.5px;
+}
+
+.site-foot-nav a:hover {
+    color: var(--accent);
+}
+
+.site-foot-icons {
+    display: flex;
+    flex: 0 0 40%;
+    justify-content: flex-end;
+}
+
+.site-foot-icons a {
+    margin-left: 30px;
+    padding: 2px 0;
+    line-height: 1;
+    color: var(--text);
+}
+
+.site-foot-icons a:hover {
+    color: var(--accent);
+}
+
+.site-foot-icons svg {
+    width: 19px;
+    height: 19px;
+    fill: currentColor;
+}
+
+.site-foot-copy {
+    display: inline-block;
+    padding: 10px 30px 30px 0;
+    font-size: 10px;
+    line-height: 1.3;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .site-foot {
+        padding-top: 8vh;
+    }
+
+    .site-foot-inner {
+        max-width: 450px;
+        padding: 0 20px;
+    }
+
+    .site-foot-nav,
+    .site-foot-icons {
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+    .site-foot-nav,
+    .site-foot-copy {
+        text-align: center;
+    }
+
+    .site-foot-nav {
+        order: 2;
+    }
+
+    .site-foot-nav .nav li {
+        margin-inline: 5px;
+    }
+
+    .site-foot-icons {
+        padding-bottom: 2vh;
+    }
+
+    .site-foot-icons a {
+        margin: 0 15px;
+    }
+
+    .site-foot-copy {
+        order: 3;
+        width: 100%;
+        padding-inline: 15px;
+    }
+}
+
+/* Error page */
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 160px 20px 0;
+    text-align: center;
+}
+
+.error-code {
+    font-size: 200px;
+    line-height: 1;
+}
+
+.error-message {
+    padding-bottom: 40px;
+    font-size: 35px;
+}
+
+.error-stack {
+    max-width: 740px;
+    margin-top: 40px;
+    font-size: 14px;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 120px;
+    }
+
+    .error-message {
+        padding-bottom: 20px;
+        font-size: 20px;
+    }
+}

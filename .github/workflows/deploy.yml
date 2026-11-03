@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Build and deploy on every push to main.
+  push:
+    branches: [main]
+  # Allow running the workflow manually from the Actions tab.
+  workflow_dispatch:
+
+# Permissions needed to deploy to GitHub Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Do not cancel an in-progress deploy; queue the next one instead.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+# No AWS access anywhere in this workflow. Post images are published to
+# S3/CloudFront from the author's machine (docs/IMAGES.md); CI only refuses
+# to build or deploy a site that still contains local post images.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # The pre-commit hook is for authors' machines, not for CI.
+      SKIP_INSTALL_SIMPLE_GIT_HOOKS: 1
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      # Fails if any image file exists under src/content/ or any post still
+      # references a local image. Needs no dependencies.
+      - name: Refuse unpublished post images
+        run: node scripts/publish-images.ts --check
+
+      - name: Install, build, and upload your site
+        uses: withastro/action@v6
+        # with:
+        #   node-version: 24   # default; Astro 7 needs Node >= 22.23.4
+        #   package-manager: npm
+        # `site` and `base` are derived from GITHUB_REPOSITORY in astro.config.mjs.
+        # For a custom domain, set them explicitly:
+        # env:
+        #   SITE_URL: 'https://example.com'
+        #   BASE_PATH: '/'
+
+      # Fails if dist/ contains an image that is not from public/ or a theme.
+      # The artifact is already uploaded at this point, but a failed job
+      # stops the deploy job below.
+      - name: Refuse post images in the build output
+        run: node scripts/check-dist.ts
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,20 @@
+---
+/**
+ * Applies the saved light/dark choice before first paint (no flash).
+ * Without a saved choice, no attribute is set and the theme's CSS follows
+ * `prefers-color-scheme`. Every theme's BaseLayout renders this in <head>.
+ */
+---
+
+<script is:inline>
+  (() => {
+    try {
+      const saved = localStorage.getItem('color-scheme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch {
+      /* storage unavailable: follow the system setting */
+    }
+  })();
+</script>

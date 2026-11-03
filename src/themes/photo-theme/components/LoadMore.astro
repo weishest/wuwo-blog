@@ -1,0 +1,40 @@
+---
+/** Square outlined "Load more" button (scripts/loadMore.ts), plain pagination without JS. (partials/load-more.hbs) */
+import type { Page } from 'astro';
+
+interface Props {
+  page: Page<unknown>;
+}
+const { page } = Astro.props;
+---
+
+{
+  page.url.next && (
+    <>
+      <div class="load-more">
+        <button class="btn js-load-more" type="button">
+          Load
+          <br />
+          more
+        </button>
+      </div>
+      <noscript>
+        <nav class="pager">
+          <nav class="pagination">
+            {page.url.prev && (
+              <a class="newer-posts" href={page.url.prev}>
+                ← Newer Posts
+              </a>
+            )}
+            <span class="page-number">
+              Page {page.currentPage} of {page.lastPage}
+            </span>
+            <a class="older-posts" href={page.url.next}>
+              Older Posts →
+            </a>
+          </nav>
+        </nav>
+      </noscript>
+    </>
+  )
+}

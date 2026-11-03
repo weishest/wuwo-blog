@@ -1,0 +1,48 @@
+---
+/**
+ * One image that is either a local file (ImageMetadata, while writing) or a
+ * published CloudFront URL (string). Local images go through Astro's <Image>
+ * as before; published ones become a plain <img> with width, height and
+ * srcset from src/data/image-manifest.json, so nothing is copied into dist/.
+ *
+ * Themes use it for covers; MDX posts use it (or <Figure>) for body images.
+ * Any other attribute (class, loading, draggable, …) is passed through.
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
+import { cdnImgAttrs, type CoverSource } from '../lib/cdn-images';
+
+interface Props extends Omit<HTMLAttributes<'img'>, 'src' | 'alt' | 'width' | 'height' | 'srcset' | 'sizes' | 'loading' | 'decoding'> {
+  src: CoverSource;
+  alt: string;
+  /** `sizes` attribute, used with `widths` (local) or the published variants. */
+  sizes?: string;
+  /** Local images only: variant widths for Astro's image service. */
+  widths?: number[];
+  /** Fixed display width, e.g. thumbnails. Local: resized to it; published: `sizes="<width>px"` and scaled width/height. */
+  width?: number;
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'auto' | 'sync';
+}
+const { src, alt, sizes, widths, width, loading, decoding, ...rest } = Astro.props;
+
+const local = {
+  ...(widths && { widths }),
+  ...(sizes && { sizes }),
+  ...(width && { width }),
+  ...(loading && { loading }),
+  ...(decoding && { decoding }),
+};
+
+let remote: Record<string, string | number | undefined> = {};
+if (typeof src === 'string') {
+  remote = { ...cdnImgAttrs(src, { sizes: width ? `${width}px` : sizes, loading }) };
+  if (decoding) remote.decoding = decoding;
+  if (width && typeof remote.width === 'number' && typeof remote.height === 'number') {
+    remote.height = Math.round((width * remote.height) / remote.width);
+    remote.width = width;
+  }
+}
+---
+
+{typeof src === 'string' ? <img {...remote} alt={alt} {...rest} /> : <Image src={src} alt={alt} {...local} {...rest} />}

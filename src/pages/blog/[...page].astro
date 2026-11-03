@@ -1,0 +1,15 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { PostListLayout } from '@theme';
+import { getPostSummaries } from '../../lib/posts';
+import { siteConfig } from '../../site.config';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPostSummaries();
+  return paginate(posts, { pageSize: siteConfig.postsPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<PostListLayout page={page} />

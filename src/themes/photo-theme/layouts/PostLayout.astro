@@ -1,0 +1,34 @@
+---
+/** Post (post.hbs): split header → body → newer/older cards. */
+import type { PostProps } from '../../contract';
+import BaseLayout from './BaseLayout.astro';
+import ImageOriginals from '../../../components/ImageOriginals.astro';
+import Split from '../components/Split.astro';
+import NextPrev from '../components/NextPrev.astro';
+
+type Props = PostProps;
+const { post, prev, next } = Astro.props;
+const { title, description, pubDate, updatedDate, cover } = post.entry.data;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={cover}
+  type="article"
+  publishedTime={pubDate}
+  modifiedTime={updatedDate}
+>
+  <article class="article post">
+    <Split mode="post" post={post} />
+
+    <div class={cover ? 'post-body' : 'post-body no-image'}>
+      <div class="post-content">
+        <slot />
+      </div>
+    </div>
+
+    <NextPrev newer={next} older={prev} />
+  </article>
+  <ImageOriginals post={post} />
+</BaseLayout>

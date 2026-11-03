@@ -1,0 +1,140 @@
+/* Slide-in menu panel
+/* ---------------------------------------------------------- */
+
+.drawer-overlay {
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    pointer-events: none;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.menu-is-open .drawer-overlay {
+    pointer-events: auto;
+    background-color: var(--shade);
+}
+
+.drawer {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(500px, 100%);
+    min-width: 320px;
+    height: 100%;
+    padding: 60px 50px 50px;
+    overflow: auto;
+    background-color: var(--bg);
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: transform 0.6s ease-in-out, visibility 0s linear 0.6s;
+}
+
+.menu-is-open .drawer {
+    visibility: visible;
+    transform: none;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* Navigation */
+.drawer-nav .nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.drawer-nav .nav li {
+    font-size: 24px;
+    line-height: 1.8;
+}
+
+.drawer-nav .nav a {
+    display: inline-block;
+    padding: 0 0 3px;
+    font-family: var(--font-head);
+    font-weight: var(--weight-head);
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat 2px 68% / 0 25%;
+    transition: background-size 0.6s ease-out;
+}
+
+.drawer-nav .nav a:hover,
+.drawer-nav .nav-current a {
+    background-size: 80% 25%;
+}
+
+.drawer-nav .nav-current a:hover {
+    background-size: 97% 25%;
+}
+
+/* Search field that opens the search overlay */
+.drawer-search {
+    width: 100%;
+    padding-top: 8vh;
+}
+
+.drawer-search-field {
+    display: block;
+    width: 80%;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-bottom: 2px solid var(--ink);
+    font-family: var(--font-head);
+    font-size: 24px;
+    font-weight: var(--weight-head);
+    text-align: left;
+    background: transparent;
+    transition: width 0.3s ease;
+}
+
+.drawer-search-field:hover {
+    width: 100%;
+}
+
+.drawer-search-hint {
+    padding: 10px 0;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.drawer-suggest {
+    margin-top: 4vh;
+    padding-bottom: 20px;
+}
+
+.drawer-suggest h3 {
+    margin: 20px 0 0;
+    font-size: 24px;
+}
+
+.drawer-suggest .taglinks {
+    padding-top: 10px;
+}
+
+@media (max-width: 479px) {
+    .drawer {
+        padding: 40px 30px;
+    }
+
+    .drawer-nav .nav li {
+        margin-bottom: 7px;
+        font-size: 20px;
+        line-height: 1.5;
+    }
+
+    .drawer-search {
+        padding-top: 5vh;
+    }
+
+    .drawer-search-field {
+        font-size: 20px;
+    }
+
+    .drawer-suggest h3 {
+        font-size: 20px;
+    }
+}

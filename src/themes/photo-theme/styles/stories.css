@@ -1,0 +1,373 @@
+/* Story rows (home) and story cards (tag / author grid)
+/* ---------------------------------------------------------- */
+
+.stories-section {
+    margin: 150px auto 0;
+}
+
+.hero + .stories-section {
+    margin-top: 150px;
+}
+
+.stories {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 80px;
+}
+
+.story {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: var(--gray-1);
+}
+
+.story-media,
+.story-body {
+    flex: 1 0 400px;
+}
+
+.story-media {
+    position: relative;
+    display: block;
+    min-height: 85vh;
+    overflow: hidden;
+}
+
+.story-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-body {
+    align-self: center;
+    padding: 100px 60px;
+}
+
+.story .byline {
+    width: 80%;
+    padding: 2px 20% 10px 0;
+}
+
+.story-title {
+    margin: 15px 0 5px -3px;
+    font-size: 60px;
+    line-height: 1.1;
+    user-select: none;
+}
+
+.story-excerpt {
+    width: 90%;
+    padding: 20px 10% 15px 0;
+    font-size: 16px;
+}
+
+.load-more {
+    width: 100%;
+    margin: 40px auto 0;
+    text-align: center;
+}
+
+.load-more .btn {
+    padding: 29px 25px;
+}
+
+.load-more .btn.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.pager .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    font-family: var(--font-head);
+    font-size: 16px;
+}
+
+/* Home rows: alternating sides */
+@media (min-width: 960px) {
+    .stories:not(.is-grid) .story {
+        min-height: 500px;
+    }
+
+    .stories:not(.is-grid) .story:nth-child(even) {
+        flex-direction: row-reverse;
+        text-align: right;
+    }
+
+    .stories:not(.is-grid) .story:nth-child(even) .byline,
+    .stories:not(.is-grid) .story:nth-child(even) .story-excerpt {
+        padding-right: 0;
+        padding-left: 20%;
+    }
+
+    .stories:not(.is-grid) .story:nth-child(even) .story-excerpt {
+        padding-left: 10%;
+    }
+
+    .stories:not(.is-grid) .story:nth-child(even) .byline {
+        margin-left: auto;
+    }
+
+    .stories:not(.is-grid) .story:nth-child(even) .story-excerpt {
+        margin-left: auto;
+    }
+
+    .stories:not(.is-grid) .story:nth-child(even) .taglinks a {
+        padding-right: 0;
+        padding-left: 10px;
+    }
+
+    /* #full-width internal tag */
+    .stories:not(.is-grid) .story.is-wide {
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .stories:not(.is-grid) .story.is-wide .story-media {
+        flex-basis: 100%;
+        min-height: 70vh;
+    }
+
+    .stories:not(.is-grid) .story.is-wide .story-body {
+        max-width: 900px;
+        padding-top: 80px;
+        padding-bottom: 15vh;
+    }
+
+    .stories:not(.is-grid) .story.is-wide.no-image .story-body {
+        padding-top: 15vh;
+    }
+
+    .stories:not(.is-grid) .story.is-wide .byline,
+    .stories:not(.is-grid) .story.is-wide .story-excerpt {
+        margin-inline: auto;
+        padding-inline: 10%;
+    }
+
+    .stories:not(.is-grid) .story.is-wide .taglinks a {
+        padding-inline: 5px;
+    }
+
+    .stories:not(.is-grid) .story.no-image:not(.is-wide) .story-body {
+        flex-basis: 100%;
+        max-width: 900px;
+        margin-inline: auto;
+        text-align: center;
+    }
+
+    .stories:not(.is-grid) .story.no-image .byline,
+    .stories:not(.is-grid) .story.no-image .story-excerpt {
+        margin-inline: auto;
+        padding-inline: 10%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1399px) {
+    .story-body {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .story-title {
+        font-size: 45px;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 1024px) {
+    .story-title {
+        font-size: 33px;
+    }
+}
+
+@media (max-width: 959px) {
+    .story {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .story-media,
+    .story-body {
+        flex-basis: 100%;
+    }
+
+    .story-title {
+        margin-left: 0;
+    }
+
+    .story .byline,
+    .story-excerpt {
+        margin-inline: auto;
+        padding-inline: 10%;
+    }
+
+    .story .taglinks a {
+        padding-inline: 5px;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 959px) {
+    .story-media {
+        min-height: 500px;
+        max-height: 500px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 959px) {
+    .story-body {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .story-media + .story-body {
+        padding-top: 60px;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+    .stories {
+        padding-inline: 40px;
+    }
+
+    .story-body {
+        padding: 70px 20px;
+    }
+
+    .story-media + .story-body {
+        padding-top: 50px;
+    }
+}
+
+@media (max-width: 479px) {
+    .stories {
+        padding-inline: 20px;
+    }
+
+    .story-media {
+        min-height: 300px;
+        max-height: 300px;
+    }
+
+    .story-body {
+        padding: 40px 0;
+    }
+
+    .story-media + .story-body {
+        padding-top: 30px;
+    }
+
+    .story-title {
+        margin-top: 5px;
+        padding-inline: 20px;
+        font-size: 25px;
+    }
+}
+
+/* Tag / author grid: two columns of cards */
+.stories.is-grid .byline time,
+.stories.is-grid .story-excerpt {
+    display: none;
+}
+
+@media (min-width: 600px) {
+    .stories.is-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .stories.is-grid .story {
+        min-height: 400px;
+        margin: 0;
+    }
+
+    .stories.is-grid .story-media {
+        max-width: 250px;
+        min-height: 300px;
+    }
+
+    .stories.is-grid .story-title {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+    .stories.is-grid .story-title {
+        font-size: 25px;
+    }
+
+    .stories.is-grid .story-body {
+        padding: 40px 20px;
+    }
+}
+
+@media (min-width: 769px) {
+    .stories.is-grid .story-title {
+        font-size: 30px;
+    }
+
+    .stories.is-grid .story-body {
+        padding: 60px 40px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1249px) {
+    .stories.is-grid .story {
+        align-content: flex-start;
+        text-align: center;
+    }
+
+    .stories.is-grid .story-media {
+        max-width: 100%;
+        max-height: none;
+    }
+
+    .stories.is-grid .story-media,
+    .stories.is-grid .story-body {
+        flex-basis: 100%;
+    }
+
+    .stories.is-grid .byline {
+        margin-inline: auto;
+        padding-inline: 10%;
+    }
+
+    .stories.is-grid .taglinks a {
+        padding-inline: 5px;
+    }
+}
+
+@media (min-width: 1250px) {
+    .stories.is-grid .story-media,
+    .stories.is-grid .story-body {
+        flex-basis: 200px;
+    }
+
+    .stories.is-grid .story {
+        text-align: left;
+    }
+}
+
+/* Not in the Ghost CSS: where the excerpt gets 10% padding on both sides,
+   its 90% content width adds up to 110% and pushes the page sideways on
+   phones. 80% keeps the same text column inside the row. */
+@media (max-width: 959px) {
+    .story-excerpt {
+        width: 80%;
+    }
+}
+
+@media (min-width: 960px) {
+    .stories:not(.is-grid) .story.is-wide .story-excerpt,
+    .stories:not(.is-grid) .story.no-image .story-excerpt {
+        width: 80%;
+    }
+}

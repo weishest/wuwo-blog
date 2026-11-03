@@ -1,0 +1,10 @@
+---
+import { TagIndexLayout } from '@theme';
+import { getTags } from '../../lib/posts';
+
+const tags = [...(await getTags()).values()]
+  .map(({ name, slug, url, posts }) => ({ name, slug, url, count: posts.length }))
+  .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+---
+
+<TagIndexLayout tags={tags} />

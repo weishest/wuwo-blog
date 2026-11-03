@@ -1,0 +1,23 @@
+---
+/** Home (index.hbs): hero slider → story list → Load more (continues into /blog/2/). */
+import type { HomeProps } from '../../contract';
+import { photoTheme } from '../theme.config';
+import BaseLayout from './BaseLayout.astro';
+import Slider from '../components/Slider.astro';
+import Stories from '../components/Stories.astro';
+
+type Props = HomeProps;
+const { posts, featured, firstPage } = Astro.props;
+
+// "Featured" falls back to the latest posts when none are featured.
+const slides = !photoTheme.showSlider
+  ? []
+  : photoTheme.sliderPosts === 'featured' && featured.length > 0
+    ? featured.slice(0, 5)
+    : posts.slice(0, 5);
+---
+
+<BaseLayout next={firstPage.url.next}>
+  <Slider posts={slides} />
+  <Stories page={firstPage} />
+</BaseLayout>

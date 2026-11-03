@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { TagLayout } from '@theme';
+import { getTags } from '../../../lib/posts';
+import { siteConfig } from '../../../site.config';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const tags = await getTags();
+  return [...tags.values()].flatMap((tag) =>
+    paginate(tag.posts, {
+      params: { tag: tag.slug },
+      props: { tag: { name: tag.name, slug: tag.slug } },
+      pageSize: siteConfig.postsPerPage,
+    }),
+  );
+}) satisfies GetStaticPaths;
+
+const { tag, page } = Astro.props;
+---
+
+<TagLayout tag={tag} page={page} />

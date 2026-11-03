@@ -1,0 +1,25 @@
+---
+import type { NotFoundProps } from '../../contract';
+import { withBase } from '../../../lib/url';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = NotFoundProps;
+---
+
+<BaseLayout title="Page not found">
+  <section class="not-found">
+    <h1>Page not found</h1>
+    <p>The page you were looking for has moved or never existed.</p>
+    <p><a href={withBase('/')}>Return home</a></p>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding-block: var(--space-6);
+  }
+  .not-found p {
+    color: var(--color-muted);
+  }
+</style>

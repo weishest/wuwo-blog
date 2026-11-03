@@ -1,0 +1,57 @@
+---
+/** A text-only entry in a post list: date, title, description. */
+import type { PostSummary } from '../../../lib/posts';
+import { formatDate } from '../../../lib/format';
+
+interface Props {
+  post: PostSummary;
+}
+const { post } = Astro.props;
+const { title, description, pubDate, draft } = post.entry.data;
+---
+
+<li class="post">
+  <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+  <div>
+    <a href={post.url}>{title}</a>{draft && <span class="draft"> (draft)</span>}
+    <p>{description}</p>
+  </div>
+</li>
+
+<style>
+  .post {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: var(--space-3);
+    padding-block: var(--space-2);
+  }
+  time {
+    color: var(--color-muted);
+    font-size: var(--font-size-small);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.15em;
+  }
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  a:hover {
+    color: var(--color-accent);
+  }
+  p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: var(--font-size-small);
+  }
+  .draft {
+    color: var(--color-accent);
+    font-size: var(--font-size-small);
+  }
+  @media (max-width: 30rem) {
+    .post {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

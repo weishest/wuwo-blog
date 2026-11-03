@@ -1,0 +1,25 @@
+---
+/** Floating header: vertical tagline on the left edge, logo top-left, menu button top-right. No bar. (partials/header.hbs) */
+import { siteConfig } from '../../../site.config';
+import { withBase } from '../../../lib/url';
+import { photoTheme } from '../theme.config';
+---
+
+<header class="site-head">
+  {siteConfig.description && <p class="site-tagline">{siteConfig.description}</p>}
+
+  <a class="site-logo" href={withBase('/')}>
+    {
+      photoTheme.logo ? (
+        <img src={withBase(photoTheme.logo)} alt={siteConfig.title} />
+      ) : (
+        <span class="site-logo-text">{siteConfig.title}</span>
+      )
+    }
+  </a>
+
+  <button class="burger js-menu-toggle" type="button" aria-label="Open menu" aria-controls="site-menu" aria-expanded="false">
+    <span class="burger-bar"></span>
+    <span class="burger-bar"></span>
+  </button>
+</header>

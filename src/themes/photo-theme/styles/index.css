@@ -1,0 +1,18 @@
+/*
+Photo theme stylesheet, ported from the Ghost photo-theme (assets/css/).
+Imported once by layouts/BaseLayout.astro. All rules are global, like the
+original, so the class names match the Ghost markup.
+*/
+
+@import "./vars.css";
+@import "./base.css";
+@import "./header.css";
+@import "./menu.css";
+@import "./split.css";
+@import "./stories.css";
+@import "./archive.css";
+@import "./post.css";
+@import "./footer.css";
+@import "./search.css";
+@import "./tags.css";
+@import "./lightbox.css";

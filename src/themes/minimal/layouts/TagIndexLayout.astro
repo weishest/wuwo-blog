@@ -1,0 +1,35 @@
+---
+import type { TagIndexProps } from '../../contract';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = TagIndexProps;
+const { tags } = Astro.props;
+---
+
+<BaseLayout title="Tags" description="Browse posts by tag.">
+  <h1>Tags</h1>
+  <ul class="tags">
+    {
+      tags.map((t) => (
+        <li>
+          <a href={t.url}>#{t.name}</a> <span>{t.count}</span>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  .tags {
+    list-style: none;
+    padding: 0;
+    columns: 2;
+  }
+  li {
+    padding-block: var(--space-1);
+  }
+  span {
+    color: var(--color-muted);
+    font-size: var(--font-size-small);
+  }
+</style>

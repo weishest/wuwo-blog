@@ -1,0 +1,102 @@
+---
+/** A card with cover image (or gradient), title, description and meta. */
+import PostImage from '../../../components/PostImage.astro';
+import type { PostSummary } from '../../../lib/posts';
+import { formatDate } from '../../../lib/format';
+
+interface Props {
+  post: PostSummary;
+}
+const { post } = Astro.props;
+const { title, description, pubDate, cover, coverAlt, draft } = post.entry.data;
+---
+
+<li class="card">
+  <a class="link" href={post.url}>
+    <div class="media">
+      {
+        cover ? (
+          <PostImage src={cover} alt={coverAlt ?? ''} widths={[400, 800]} sizes="(min-width: 60rem) 22rem, 100vw" />
+        ) : (
+          <div class="placeholder" aria-hidden="true" />
+        )
+      }
+    </div>
+    <div class="body">
+      <p class="meta">
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        {draft && <span class="draft">Draft</span>}
+      </p>
+      <h3>{title}</h3>
+      <p class="desc">{description}</p>
+    </div>
+  </a>
+</li>
+
+<style>
+  .card {
+    list-style: none;
+  }
+  .link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-bg);
+    color: inherit;
+    text-decoration: none;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .link:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    text-decoration: none;
+    color: inherit;
+  }
+  .media {
+    aspect-ratio: 1200 / 630;
+    background: var(--color-surface);
+  }
+  .media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-hero);
+    opacity: 0.85;
+  }
+  .body {
+    padding: var(--space-3) var(--space-4) var(--space-4);
+  }
+  .meta {
+    margin: 0;
+    font-size: var(--font-size-small);
+    color: var(--color-muted);
+  }
+  h3 {
+    margin: var(--space-1) 0 var(--space-2);
+  }
+  .desc {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .draft {
+    margin-left: var(--space-2);
+    padding: 0 var(--space-2);
+    border-radius: 999px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+</style>

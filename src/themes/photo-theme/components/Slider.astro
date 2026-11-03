@@ -1,0 +1,50 @@
+---
+/** Home slider. Behaviour in scripts/slider.ts. (partials/slider.hbs) */
+import type { PostSummary } from '../../../lib/posts';
+import Split from './Split.astro';
+
+interface Props {
+  posts: PostSummary[];
+}
+const { posts } = Astro.props;
+const n = posts.length;
+---
+
+{
+  n > 0 && (
+    <section class="hero js-hero" aria-roledescription="carousel" aria-label="Highlighted stories" tabindex="-1">
+      <div class="hero-track">
+        {posts.map((post, i) => (
+          <article
+            class={i === 0 ? 'hero-slide is-active' : 'hero-slide'}
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${n}`}
+            aria-hidden={i === 0 ? undefined : 'true'}
+          >
+            <Split mode="slide" post={post} eager={i === 0} />
+          </article>
+        ))}
+      </div>
+
+      {n > 1 && (
+        <div class="hero-nav">
+          <p class="hero-count">
+            <span class="js-hero-current">1</span>
+            {' — '}
+            <span>{n}</span>
+          </p>
+          <div class="hero-dots">
+            {posts.map((_, i) => (
+              <button
+                class={i === 0 ? 'hero-dot is-active' : 'hero-dot'}
+                type="button"
+                data-slide={i}
+                aria-label={`Show slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}

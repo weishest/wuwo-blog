@@ -1,0 +1,16 @@
+---
+import type { PostListProps } from '../../contract';
+import BaseLayout from './BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import Pagination from '../components/Pagination.astro';
+
+type Props = PostListProps;
+const { page } = Astro.props;
+const title = page.currentPage > 1 ? `Writing (page ${page.currentPage})` : 'Writing';
+---
+
+<BaseLayout title={title} description="All posts, newest first.">
+  <h1>Writing</h1>
+  <PostList posts={page.data} />
+  <Pagination page={page} />
+</BaseLayout>

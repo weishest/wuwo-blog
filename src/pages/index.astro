@@ -1,0 +1,12 @@
+---
+import { HomeLayout } from '@theme';
+import { firstBlogPage, getPostSummaries } from '../lib/posts';
+import { siteConfig } from '../site.config';
+
+const all = await getPostSummaries();
+const posts = all.slice(0, siteConfig.homePostCount);
+const featured = all.filter((p) => p.entry.data.featured).slice(0, 5);
+const firstPage = firstBlogPage(all, siteConfig.postsPerPage);
+---
+
+<HomeLayout posts={posts} featured={featured} firstPage={firstPage} />

@@ -1,0 +1,42 @@
+---
+/** Tag header: optional cover band with a box overlapping it. (partials/archive-header.hbs) */
+import PostImage from '../../../components/PostImage.astro';
+import type { CoverSource } from '../../contract';
+
+interface Props {
+  name: string;
+  description?: string | undefined;
+  total: number;
+  /** Counter label, singular and plural. */
+  unit?: [string, string];
+  /** Optional cover band image (local or published). */
+  band?: CoverSource | undefined;
+}
+const { name, description, total, unit = ['story', 'stories'], band } = Astro.props;
+---
+
+<section class={band ? 'archive has-cover' : 'archive'}>
+  {
+    band && (
+      <div class="archive-cover">
+        <PostImage src={band} width={2000} alt="" />
+      </div>
+    )
+  }
+
+  <div class="archive-box">
+    <div class="archive-title">
+      <div>
+        <h1>{name}</h1>
+        {description && <p class="archive-description">{description}</p>}
+      </div>
+    </div>
+
+    <div class="archive-meta">
+      <div class="archive-counter">
+        <span class="archive-count">{total}</span>
+        <span class="archive-count-label">{total === 1 ? unit[0] : unit[1]}</span>
+      </div>
+    </div>
+  </div>
+</section>

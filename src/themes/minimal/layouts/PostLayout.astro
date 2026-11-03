@@ -1,0 +1,95 @@
+---
+import PostImage from '../../../components/PostImage.astro';
+import type { PostProps } from '../../contract';
+import { formatDate } from '../../../lib/format';
+import BaseLayout from './BaseLayout.astro';
+import ImageOriginals from '../../../components/ImageOriginals.astro';
+import TagList from '../components/TagList.astro';
+
+type Props = PostProps;
+const { post, prev, next } = Astro.props;
+const { title, description, pubDate, updatedDate, cover, coverAlt, draft } = post.entry.data;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={cover}
+  type="article"
+  publishedTime={pubDate}
+  modifiedTime={updatedDate}
+>
+  <article>
+    <header class="post-header">
+      <h1>{title}</h1>
+      <p class="meta">
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        {
+          updatedDate && (
+            <>
+              {' · updated '}
+              <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>
+            </>
+          )
+        }
+        {draft && <strong>{' · draft'}</strong>}
+      </p>
+    </header>
+
+    {cover && <PostImage class="cover" src={cover} alt={coverAlt ?? ''} widths={[640, 960, 1280]} sizes="(min-width: 40rem) 38rem, 100vw" />}
+
+    <div class="prose">
+      <slot />
+    </div>
+
+    <footer class="post-footer">
+      <TagList tags={post.tags} />
+      <nav class="adjacent" aria-label="More posts">
+        {next ? <a href={next.url}>← {next.entry.data.title}</a> : <span />}
+        {prev ? <a href={prev.url}>{prev.entry.data.title} →</a> : <span />}
+      </nav>
+    </footer>
+  </article>
+  <ImageOriginals post={post} />
+</BaseLayout>
+
+<script>
+  import { initLightbox } from '../../../lib/lightbox';
+  initLightbox('article .cover, .prose img');
+</script>
+
+<style>
+  .post-header h1 {
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .meta {
+    color: var(--color-muted);
+    font-size: var(--font-size-small);
+    margin: 0 0 var(--space-5);
+  }
+  .cover {
+    width: 100%;
+    height: auto;
+    margin-bottom: var(--space-4);
+    border-radius: var(--radius);
+  }
+  .prose :global(p) {
+    hyphens: auto;
+  }
+  .post-footer {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-small);
+  }
+  .adjacent {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+  .adjacent a:last-child {
+    text-align: right;
+  }
+</style>

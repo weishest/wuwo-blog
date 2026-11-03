@@ -1,0 +1,86 @@
+---
+import type { HomeProps } from '../../contract';
+import { siteConfig } from '../../../site.config';
+import { withBase } from '../../../lib/url';
+import BaseLayout from './BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+
+type Props = HomeProps;
+const { posts } = Astro.props;
+---
+
+<BaseLayout>
+  <section class="hero">
+    <h1>{siteConfig.title}</h1>
+    <p>{siteConfig.description}</p>
+    <div class="actions">
+      <a class="primary" href={withBase('/blog/')}>Read the blog</a>
+      <a class="secondary" href={withBase('/about/')}>About me</a>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Latest posts</h2>
+    <a href={withBase('/blog/')}>View all →</a>
+  </div>
+  <PostList posts={posts} />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-6) var(--space-5);
+  }
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p {
+    max-width: 36rem;
+    margin: var(--space-3) 0 var(--space-4);
+    font-size: 1.25rem;
+    color: var(--color-muted);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .actions a {
+    padding: var(--space-2) var(--space-4);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .primary {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .primary:hover {
+    background: var(--color-accent-hover);
+    color: #fff;
+  }
+  .secondary {
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+  .secondary:hover {
+    border-color: var(--color-accent);
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-4);
+  }
+  .section-head h2 {
+    margin: 0;
+  }
+  .section-head a {
+    font-size: var(--font-size-small);
+    font-weight: 600;
+  }
+</style>

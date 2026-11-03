@@ -1,0 +1,40 @@
+---
+import type { HomeProps } from '../../contract';
+import { siteConfig } from '../../../site.config';
+import { withBase } from '../../../lib/url';
+import BaseLayout from './BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+
+type Props = HomeProps;
+const { posts } = Astro.props;
+---
+
+<BaseLayout>
+  <section class="intro">
+    <p>{siteConfig.description}</p>
+  </section>
+  <h2 class="section-title">Recent writing</h2>
+  <PostList posts={posts} />
+  <p class="more"><a href={withBase('/blog/')}>All posts →</a></p>
+</BaseLayout>
+
+<style>
+  .intro p {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--color-muted);
+    margin: 0 0 var(--space-5);
+  }
+  .section-title {
+    font-size: var(--font-size-small);
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    font-weight: 400;
+    margin-bottom: var(--space-2);
+  }
+  .more {
+    margin-top: var(--space-4);
+    font-size: var(--font-size-small);
+  }
+</style>

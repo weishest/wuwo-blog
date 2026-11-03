@@ -1,0 +1,17 @@
+---
+/** "7 years ago by Author". Pass showDate to include the relative date. (partials/byline.hbs) */
+import { siteConfig } from '../../../site.config';
+import { withBase } from '../../../lib/url';
+import { timeAgo } from '../lib/time-ago';
+
+interface Props {
+  date: Date;
+  showDate?: boolean;
+}
+const { date, showDate = false } = Astro.props;
+const iso = date.toISOString().slice(0, 10);
+---
+
+<p class="byline">
+  {showDate && <time datetime={iso} data-timeago>{timeAgo(date)}</time>}{showDate && ' '}by{' '}<a href={withBase('/about/')}>{siteConfig.author}</a>
+</p>

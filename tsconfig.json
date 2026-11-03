@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules", "infra", ".image-archive"],
+  "compilerOptions": {
+    "paths": {
+      // Editor/type-check only. At build time '@theme' is resolved by the Vite
+      // alias in astro.config.mjs to the theme chosen in src/site.config.ts.
+      // Every theme implements the same contract (src/themes/contract.ts),
+      // so pointing this at any one theme is enough for types.
+      "@theme": ["./src/themes/minimal/index.ts"],
+      "@/*": ["./src/*"]
+    }
+  }
+}

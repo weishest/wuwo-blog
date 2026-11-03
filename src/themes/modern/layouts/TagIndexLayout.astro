@@ -1,0 +1,29 @@
+---
+import type { TagIndexProps } from '../../contract';
+import BaseLayout from './BaseLayout.astro';
+import TagList from '../components/TagList.astro';
+
+type Props = TagIndexProps;
+const { tags } = Astro.props;
+---
+
+<BaseLayout title="Tags" description="Browse posts by tag.">
+  <header class="page-head">
+    <h1>Tags</h1>
+    <p>{tags.length} topics</p>
+  </header>
+  <TagList tags={tags} />
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-5) var(--space-4);
+  }
+  .page-head h1 {
+    margin: 0;
+  }
+  .page-head p {
+    margin: var(--space-2) 0 0;
+    color: var(--color-muted);
+  }
+</style>

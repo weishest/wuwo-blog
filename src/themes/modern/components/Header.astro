@@ -1,0 +1,98 @@
+---
+import { siteConfig } from '../../../site.config';
+import { withBase } from '../../../lib/url';
+import ThemeToggle from './ThemeToggle.astro';
+
+const links = [
+  { href: withBase('/blog/'), label: 'Blog' },
+  { href: withBase('/tags/'), label: 'Tags' },
+  { href: withBase('/about/'), label: 'About' },
+];
+const path = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="container inner">
+    <a class="brand" href={withBase('/')}>
+      <span class="logo" aria-hidden="true"></span>
+      {siteConfig.title}
+    </a>
+    <nav aria-label="Main">
+      {
+        links.map((l) => (
+          <a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>
+            {l.label}
+          </a>
+        ))
+      }
+      <a href={withBase('/rss.xml')} class="rss" aria-label="RSS feed">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path fill="currentColor" d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6V3Zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7V9Zm2 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"></path>
+        </svg>
+      </a>
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--color-header-bg);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    height: var(--header-height);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  .logo {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 8px;
+    background: var(--gradient-hero);
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+  nav a {
+    padding: var(--space-1) var(--space-3);
+    border-radius: 999px;
+    color: var(--color-muted);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--color-text);
+    background: var(--color-surface);
+  }
+  .rss {
+    display: inline-grid;
+    place-items: center;
+    padding: var(--space-2);
+  }
+  @media (max-width: 30rem) {
+    nav a {
+      padding-inline: var(--space-2);
+    }
+  }
+</style>

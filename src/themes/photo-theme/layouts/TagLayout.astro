@@ -1,0 +1,15 @@
+---
+/** Tag archive (tag.hbs): archive header + two-column cards + Load more. */
+import type { TagProps } from '../../contract';
+import BaseLayout from './BaseLayout.astro';
+import ArchiveHeader from '../components/ArchiveHeader.astro';
+import Stories from '../components/Stories.astro';
+
+type Props = TagProps;
+const { tag, page } = Astro.props;
+---
+
+<BaseLayout title={tag.name} description={`Stories tagged “${tag.name}”.`} prev={page.url.prev} next={page.url.next}>
+  <ArchiveHeader name={tag.name} total={page.total} />
+  <Stories page={page} grid />
+</BaseLayout>

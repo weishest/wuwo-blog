@@ -1,0 +1,11 @@
+{
+  "app": "node bin/images.ts",
+  "context": {
+    "_comment": "allowedOrigin: the blog's origin (required, used for CORS). domainName + certificateArn (us-east-1): optional custom image domain. policyName must start with wuwo-blog-images- (see policies/wuwo-blog-cdk-execution.json).",
+    "allowedOrigin": "https://wuwo.blog",
+    "domainName": "static.wuwo.blog",
+    "certificateArn": "arn:aws:acm:us-east-1:426388228366:certificate/b5a581bf-547d-475b-85b1-770e871f33ff",
+    "stackName": "WuwoBlogImages",
+    "policyName": "wuwo-blog-images-publisher"
+  }
+}

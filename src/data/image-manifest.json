@@ -1,0 +1,102 @@
+{
+  "https://static.wuwo.blog/blog/a-morning-in-the-valley/coast-wide-e6b4fe8e.webp": {
+    "width": 2400,
+    "height": 1200,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ]
+  },
+  "https://static.wuwo.blog/blog/a-morning-in-the-valley/valley-wide-5704e3b5.webp": {
+    "width": 2400,
+    "height": 1200,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ]
+  },
+  "https://static.wuwo.blog/blog/all-about-chimneys/p1060583-6be485e6.webp": {
+    "width": 2400,
+    "height": 1800,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "original": {
+      "url": "https://static.wuwo.blog/blog/all-about-chimneys/p1060583-6be485e6-original.jpg",
+      "width": 3648,
+      "height": 2736,
+      "bytes": 1681193
+    }
+  },
+  "https://static.wuwo.blog/blog/all-about-chimneys/p1060616-bdcaf41e.webp": {
+    "width": 2400,
+    "height": 1800,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "original": {
+      "url": "https://static.wuwo.blog/blog/all-about-chimneys/p1060616-bdcaf41e-original.jpg",
+      "width": 3648,
+      "height": 2736,
+      "bytes": 1733236
+    }
+  },
+  "https://static.wuwo.blog/blog/all-about-chimneys/p1060617-0912fe9e.webp": {
+    "width": 2400,
+    "height": 1800,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "original": {
+      "url": "https://static.wuwo.blog/blog/all-about-chimneys/p1060617-0912fe9e-original.jpg",
+      "width": 3648,
+      "height": 2736,
+      "bytes": 1914891
+    }
+  },
+  "https://static.wuwo.blog/blog/all-about-chimneys/p1060619-67b1d120.webp": {
+    "width": 2400,
+    "height": 1800,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "original": {
+      "url": "https://static.wuwo.blog/blog/all-about-chimneys/p1060619-67b1d120-original.jpg",
+      "width": 3648,
+      "height": 2736,
+      "bytes": 1069068
+    }
+  },
+  "https://static.wuwo.blog/blog/all-about-chimneys/p1060620-43f41ef3.webp": {
+    "width": 2400,
+    "height": 1800,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "original": {
+      "url": "https://static.wuwo.blog/blog/all-about-chimneys/p1060620-43f41ef3-original.jpg",
+      "width": 3648,
+      "height": 2736,
+      "bytes": 1301828
+    }
+  }
+}

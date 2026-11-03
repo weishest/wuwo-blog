@@ -1,0 +1,36 @@
+---
+import { siteConfig } from '../../../site.config';
+
+const year = new Date().getFullYear();
+const social = Object.entries(siteConfig.social);
+---
+
+<footer class="container footer">
+  <p>
+    © {year}
+    {siteConfig.author}
+    {
+      social.map(([name, href]) => (
+        <>
+          {' · '}
+          <a href={href} rel="me">
+            {name}
+          </a>
+        </>
+      ))
+    }
+  </p>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--space-6);
+    padding-block: var(--space-4) var(--space-5);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: var(--font-size-small);
+  }
+  .footer a {
+    color: inherit;
+  }
+</style>
