@@ -35,8 +35,12 @@
     letter-spacing: 0.5px;
 }
 
-.site-foot-nav a:hover {
-    color: var(--accent);
+/* Hover effects only where a real pointer hovers: on touch screens a tap
+   would otherwise leave them stuck on until the next tap elsewhere. */
+@media (hover: hover) {
+    .site-foot-nav a:hover {
+        color: var(--accent);
+    }
 }
 
 .site-foot-icons {
@@ -52,8 +56,10 @@
     color: var(--text);
 }
 
-.site-foot-icons a:hover {
-    color: var(--accent);
+@media (hover: hover) {
+    .site-foot-icons a:hover {
+        color: var(--accent);
+    }
 }
 
 .site-foot-icons svg {

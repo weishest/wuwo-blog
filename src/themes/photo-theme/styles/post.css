@@ -44,8 +44,12 @@
     transition: background-size 0.3s ease-out;
 }
 
-.post-content a:not([class]):hover {
-    background-size: 97% 1px;
+/* Hover effects only where a real pointer hovers: on touch screens a tap
+   would otherwise leave them stuck on until the next tap elsewhere. */
+@media (hover: hover) {
+    .post-content a:not([class]):hover {
+        background-size: 97% 1px;
+    }
 }
 
 .post-content h1,
@@ -71,8 +75,10 @@
     transition: background-size 0.6s ease-out;
 }
 
-.post-content :is(h1, h2, h3, h4, h5, h6, blockquote) a:hover {
-    background-size: 97% 30% !important;
+@media (hover: hover) {
+    .post-content :is(h1, h2, h3, h4, h5, h6, blockquote) a:hover {
+        background-size: 97% 30% !important;
+    }
 }
 
 .post-content ul,

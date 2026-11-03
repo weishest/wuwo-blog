@@ -52,11 +52,7 @@ const year = new Date().getFullYear();
           photoTheme.footerText
         ) : (
           <>
-            © {year} <a href={withBase('/')}>{siteConfig.title}</a>. All rights reserved. Published with{' '}
-            <a href="https://astro.build" target="_blank" rel="noopener">
-              Astro
-            </a>
-            .
+            © {year} <a href={withBase('/')}>{siteConfig.title}</a>. All rights reserved.
           </>
         )
       }

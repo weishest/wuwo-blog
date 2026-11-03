@@ -58,13 +58,20 @@
     transition: background-size 0.6s ease-out;
 }
 
-.drawer-nav .nav a:hover,
 .drawer-nav .nav-current a {
     background-size: 80% 25%;
 }
 
-.drawer-nav .nav-current a:hover {
-    background-size: 97% 25%;
+/* Hover effects only where a real pointer hovers: on touch screens a tap
+   would otherwise leave them stuck on until the next tap elsewhere. */
+@media (hover: hover) {
+    .drawer-nav .nav a:hover {
+        background-size: 80% 25%;
+    }
+
+    .drawer-nav .nav-current a:hover {
+        background-size: 97% 25%;
+    }
 }
 
 /* Search field that opens the search overlay */

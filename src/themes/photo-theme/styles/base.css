@@ -91,8 +91,12 @@ button {
     transition: background-size 0.6s ease-out;
 }
 
-.mark:hover {
-    background-size: 97% 30%;
+/* Hover effects only where a real pointer hovers: on touch screens a tap
+   would otherwise leave them stuck on until the next tap elsewhere. */
+@media (hover: hover) {
+    .mark:hover {
+        background-size: 97% 30%;
+    }
 }
 
 /* "by A & B" line */
@@ -107,8 +111,10 @@ button {
     display: inline-block;
 }
 
-.byline a:hover {
-    color: var(--accent);
+@media (hover: hover) {
+    .byline a:hover {
+        color: var(--accent);
+    }
 }
 
 /* Tag links */
@@ -126,8 +132,10 @@ button {
     letter-spacing: 1px;
 }
 
-.taglinks a:hover {
-    color: var(--accent);
+@media (hover: hover) {
+    .taglinks a:hover {
+        color: var(--accent);
+    }
 }
 
 
