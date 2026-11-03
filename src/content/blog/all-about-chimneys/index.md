@@ -8,6 +8,8 @@ coverAlt: .
 fullWidth: true
 ---
 
+A chimney in Mustamaë happens to be my most photographed object.
+
 ![alt text](https://static.wuwo.blog/blog/all-about-chimneys/p1060619-67b1d120.webp)
 
 ![alt text](https://static.wuwo.blog/blog/all-about-chimneys/p1060617-0912fe9e.webp)
