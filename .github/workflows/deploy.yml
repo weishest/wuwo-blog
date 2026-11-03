@@ -46,11 +46,12 @@ jobs:
         # with:
         #   node-version: 24   # default; Astro 7 needs Node >= 22.23.4
         #   package-manager: npm
-        # `site` and `base` are derived from GITHUB_REPOSITORY in astro.config.mjs.
-        # For a custom domain, set them explicitly:
-        # env:
-        #   SITE_URL: 'https://example.com'
-        #   BASE_PATH: '/'
+        # The site is served from the custom domain in public/CNAME, at its
+        # root. Without these two values, astro.config.mjs would derive
+        # https://<owner>.github.io and /<repo>/ from GITHUB_REPOSITORY.
+        env:
+          SITE_URL: 'https://wuwo.blog'
+          BASE_PATH: '/'
 
       # Fails if dist/ contains an image that is not from public/ or a theme.
       # The artifact is already uploaded at this point, but a failed job

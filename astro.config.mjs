@@ -22,7 +22,7 @@ import { cdnImages } from './src/lib/satteri-cdn-images.ts';
  * edits. Set `SITE_URL` / `BASE_PATH` env vars (or edit the fallbacks below)
  * to override, e.g. for a custom domain.
  */
-const FALLBACK_SITE = 'https://your-username.github.io';
+const FALLBACK_SITE = 'https://wuwo.blog';
 const FALLBACK_BASE = '/';
 
 function resolveSiteAndBase() {
