@@ -32,7 +32,7 @@ export const siteConfig = {
      * metadata removed) and offer it as "Download original" in the image
      * viewer. For photos published earlier: `npm run images:publish -- --originals`.
      */
-    originals: true,
+    originals: false,
     /**
      * `sizes` attribute for published images inside post bodies. Match the
      * active theme's column: minimal ~38rem, modern ~68rem, photo-theme 740px
