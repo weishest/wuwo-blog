@@ -22,8 +22,8 @@
     --font-body: "Mulish", sans-serif;
     --weight-head: 600;
 
-    --logo-height: 45px;
-    --logo-height-sm: 30px;
+    --logo-height: 32px;
+    --logo-height-sm: 22px;
 
     /* Shared token names used by theme-independent MDX components (THEMES.md) */
     --color-bg: var(--bg);

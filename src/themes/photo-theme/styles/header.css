@@ -11,13 +11,13 @@
 
 .site-logo img {
     width: auto;
-    max-width: 300px;
+    max-width: 215px;
     max-height: var(--logo-height);
 }
 
 .site-logo-text {
     font-family: var(--font-head);
-    font-size: 40px;
+    font-size: 29px;
     font-weight: var(--weight-head);
     line-height: 1.1;
     letter-spacing: -0.018em;
@@ -117,7 +117,7 @@
     }
 
     .site-logo-text {
-        font-size: 30px;
+        font-size: 22px;
         line-height: 1.3;
     }
 
