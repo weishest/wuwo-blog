@@ -12,10 +12,10 @@ A chimney in Mustamaë happens to be my most photographed object.
 
 ![](https://static.wuwo.blog/blog/all-about-chimneys/p1060619-2bb7636b.webp)
 
-![alt text](https://static.wuwo.blog/blog/all-about-chimneys/p1060620-1-6d9e5309.webp)
+![alt text](https://static.wuwo.blog/blog/all-about-chimneys/p1060620-f0cc6f03.webp)
 
 ![](https://static.wuwo.blog/blog/all-about-chimneys/p1060583-5875d326.webp)
 
-![](https://static.wuwo.blog/blog/all-about-chimneys/p1060616-e6890ad5.webp)
+![](https://static.wuwo.blog/blog/all-about-chimneys/p1060616-25a6e454.webp)
 
 The above photos were all shot with a Lumix DX-3 digital camera. 
