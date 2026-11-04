@@ -4,10 +4,8 @@ import slider from './slider';
 import reveal from './reveal';
 import loadMore from './loadMore';
 import search from './search';
-import timeago from './timeago';
 import { initLightbox } from '../../../lib/lightbox';
 
-timeago();
 menu();
 slider();
 reveal();

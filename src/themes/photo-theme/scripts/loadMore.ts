@@ -1,6 +1,5 @@
 // "Load more": fetches the next page and appends its story rows or cards.
 import { observe } from './reveal';
-import { refreshTimes } from './timeago';
 
 async function fetchPage(url: string): Promise<{ items: Element[]; next: string | null }> {
   const res = await fetch(url);
@@ -32,7 +31,6 @@ export default function loadMore(): void {
     try {
       const page = await fetchPage(next);
       page.items.forEach((item) => list.append(item));
-      refreshTimes(page.items);
       observe(page.items);
       next = page.next;
       if (!next && wrapper) wrapper.hidden = true;

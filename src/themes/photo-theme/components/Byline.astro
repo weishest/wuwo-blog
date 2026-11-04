@@ -1,8 +1,8 @@
 ---
-/** "7 years ago by Author". Pass showDate to include the relative date. (partials/byline.hbs) */
+/** "July 21, 2029 by Author". Pass showDate to include the date. (partials/byline.hbs) */
 import { siteConfig } from '../../../site.config';
+import { formatDate } from '../../../lib/format';
 import { withBase } from '../../../lib/url';
-import { timeAgo } from '../lib/time-ago';
 
 interface Props {
   date: Date;
@@ -13,5 +13,5 @@ const iso = date.toISOString().slice(0, 10);
 ---
 
 <p class="byline">
-  {showDate && <time datetime={iso} data-timeago>{timeAgo(date)}</time>}{showDate && ' '}by{' '}<a href={withBase('/about/')}>{siteConfig.author}</a>
+  {showDate && <time datetime={iso}>{formatDate(date, 'long')}</time>}{showDate && ' '}by{' '}<a href={withBase('/about/')}>{siteConfig.author}</a>
 </p>

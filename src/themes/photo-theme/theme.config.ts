@@ -18,7 +18,7 @@ export const photoTheme = {
 
   fonts: {
     /** Stylesheet that loads the two families. Set to '' when self-hosting fonts. */
-    href: 'https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,600;1,600&family=Mulish:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,500;0,600;1,500;1,600&family=Mulish:ital,wght@0,400;0,700;1,400;1,700&display=swap',
     head: '"Josefin Sans", sans-serif',
     body: '"Mulish", sans-serif',
     /** 600 for Josefin Sans; use 700 for most custom heading fonts. */
