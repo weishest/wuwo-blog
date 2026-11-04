@@ -9,7 +9,7 @@ export const siteConfig = {
   theme: 'photo-theme',
 
   title: 'Wuwo 無我',
-  description: 'Imagistic puns and textual montages',
+  description: 'Imagerial puns and textual montages',
   author: 'Wei',
   lang: 'en',
   homePostCount: 5,

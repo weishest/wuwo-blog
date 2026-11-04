@@ -137,7 +137,16 @@ export function initLightbox(selector: string): void {
   dialog.addEventListener('close', () => {
     document.documentElement.classList.remove('lightbox-is-open');
     view.removeAttribute('src');
-    opener?.focus();
+    // Return focus to the image (so Tab continues from there), but without
+    // the focus ring: closing with Esc counts as keyboard use, which would
+    // otherwise draw it. The ring comes back as soon as focus moves on and
+    // returns, e.g. when tabbing.
+    if (opener) {
+      const el = opener;
+      el.style.outline = 'none';
+      el.addEventListener('blur', () => el.style.removeProperty('outline'), { once: true });
+      el.focus({ preventScroll: true, focusVisible: false } as FocusOptions);
+    }
   });
 
   images.forEach((img, i) => {
