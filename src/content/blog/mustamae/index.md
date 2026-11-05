@@ -12,15 +12,15 @@ After returning to Tallinn, I moved to a cozy apartment in Mustamäe. This distr
 
 ![](https://static.wuwo.blog/blog/mustamae/p1060389-fc74ca69.webp)
 
+![The TalTech library](https://static.wuwo.blog/blog/mustamae/p1060403-42180768.webp)
+*The TalTech library.*
+
 ![Trolleybus No.81 that runs between Mustamäe and Kaubamaja](https://static.wuwo.blog/blog/mustamae/p1060715-6a22f263.webp)
 *Trolleybus No.81 that runs between Mustamäe and Kaubamaja.*
 
 ![A spa next to my house.](https://static.wuwo.blog/blog/mustamae/p1060368-f7ea5dd3.webp)
 *Some otherworldly objects can be found in the neighborhood -- a water slide and a tank of the local spa.*
 
-
-![The TalTech library](https://static.wuwo.blog/blog/mustamae/p1060403-42180768.webp)
-*The TalTech library.*
 
 ![](https://static.wuwo.blog/blog/mustamae/p1060288-610d50bf.webp)
 
