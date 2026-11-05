@@ -12,7 +12,7 @@ A chimney in Mustamaë happens to be my most photographed object.
 
 ![](https://static.wuwo.blog/blog/all-about-chimneys/p1060619-2bb7636b.webp)
 
-![alt text](https://static.wuwo.blog/blog/all-about-chimneys/p1060620-f0cc6f03.webp)
+![alt text](https://static.wuwo.blog/blog/all-about-chimneys/p1060620-e16bd420.webp)
 
 ![](https://static.wuwo.blog/blog/all-about-chimneys/p1060583-5875d326.webp)
 
